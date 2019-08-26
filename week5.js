@@ -6,7 +6,7 @@ app.set('view engine', 'html');
 app.use(express.static('images'));
 app.use(express.static('css'));
 let db = [];
-// parse application/x-www-form-urlencoded
+
 app.use(bodyParser.urlencoded({
     extended: false
 }))
@@ -25,7 +25,9 @@ app.post('/data', function (req, res) {
         DueDate: req.body.taskdue,
         Description: req.body.taskDesc
     });
-    res.send('New Task added')
+    // res.send('New Task added')
+    res.sendFile(__dirname + '/homepage.html')
+    
 })
 
 
