@@ -25,9 +25,7 @@ app.post('/data', function (req, res) {
         DueDate: req.body.taskdue,
         Description: req.body.taskDesc
     });
-    // res.send('New Task added')
     res.sendFile(__dirname + '/homepage.html')
-    
 })
 
 
