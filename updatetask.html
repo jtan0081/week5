@@ -1,0 +1,22 @@
+<html>
+
+<body>
+    <h1><a href="/">Home</a>
+        <a href="/listtasks2">List Tasks</a> <br>
+        <a href="/newtask2">Add new Task</a>
+        <a href="/deletetask">Delete Task</a> <br>
+        <a href="/deletetaskC">Delete all the completed Task</a>
+    </h1>
+    <link rel="stylesheet" href="styles.css">
+    <form action="/updatetaskdata" method="POST">
+        Task ID
+        <input type="text" name="taskId" /> </br>
+        Task New status
+        <input type="radio" name="taskstatnew" value="InProgress"/> InProgress
+        <input type="radio" name="taskstatnew" value="Complete"/> Complete</br>
+        </br><br>
+        <button>Submit</button>
+    </form>
+</body>
+
+</html>
