@@ -98,9 +98,19 @@ app.get('/deletetaskC', function (req, res) {
     res.sendFile(__dirname + '/deletetaskC.html');
 });
 app.post('/deletetaskdataC', function (req, res) {
+    let duedate = '10/11/2019';
     db.collection('tasks').deleteMany({TaskStatus:'Complete'});
     res.redirect('/listtasks2');
 });
+app.get('/deleteOldComplete', function (req, res) {
+    res.sendFile(__dirname + '/deleteOldComplete.html');
+});
+app.post('/deletetaskdataC2', function (req, res) {
+    let duedate = '10/11/2019';
+    db.collection('tasks').deleteMany({$and:[{TaskStatus:'Complete'},{DueDate:{$gt:duedate}}]});
+    res.redirect('/listtasks2');
+});
+
 
 
 app.listen(8080);
