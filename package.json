@@ -1,7 +1,6 @@
 {
   "name": "cls",
   "version": "1.0.0",
-  "description": "",
   "main": "WEEK2.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,8 +12,20 @@
     "ejs": "^2.6.2",
     "express": "^4.17.1",
     "mongodb": "^3.3.2",
+    "mongoose": "^5.6.13",
     "morgan": "^1.9.1",
     "querystring": "^0.2.0",
     "save": "^2.4.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jtan0081/week5.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/jtan0081/week5/issues"
+  },
+  "homepage": "https://github.com/jtan0081/week5#readme",
+  "description": ""
 }
