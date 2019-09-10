@@ -16,7 +16,9 @@ app.use(bodyParser.urlencoded({
 }))
 app.use(bodyParser.json())
 let db;
-mongoose.connect('mongodb://localhost:27017/fit2095db', {useNewUrlParser: true},function (err) {
+mongoose.connect('mongodb://localhost:27017/fit2095db', {
+    useNewUrlParser: true
+}, function (err) {
     if (err) {
         console.log('Error in Mongoose connection');
         throw err;
@@ -76,17 +78,17 @@ app.get('/newtask2', function (rqe, res) {
 app.post('/taskdata', function (req, res) {
     let tasDetails = req.body;
     let task1 = new Task({
-        Taskname:tasDetails.taskname2,
-        Assignto:tasDetails.assignto2,
-        Duedate:tasDetails.duedate,
-        TaskStatus:tasDetails.status,
-        TaskDescription:tasDetails.desc
+        Taskname: tasDetails.taskname2,
+        Assignto: tasDetails.assignto2,
+        Duedate: tasDetails.duedate,
+        TaskStatus: tasDetails.status,
+        TaskDescription: tasDetails.desc
     });
     task1.save(function (err) {
         if (err) throw err;
         console.log('task1 successfully Added to DB');
     });
-    res.redirect('/listtask'); 
+    res.redirect('/listtask');
 });
 app.get('/tasknew', function (rqe, res) {
     res.sendFile(__dirname + '/tasknew.html');
@@ -105,7 +107,9 @@ app.post('/deletetaskdata', function (req, res) {
     let taskDetails = req.body;
     // let filter = { _id:taskDetails.taskId};
     // console.log(taskDetails.taskId);
-    Task.deleteOne({ '_id': taskDetails.taskId }, function (err, doc) {
+    Task.deleteOne({
+        '_id': taskDetails.taskId
+    }, function (err, doc) {
         // console.log(doc);
     });
     // db.collection('taskcols').deleteOne(filter);
@@ -115,7 +119,9 @@ app.get('/deletetaskC', function (req, res) {
     res.sendFile(__dirname + '/deletetaskC.html');
 });
 app.post('/deletetaskdataC', function (req, res) {
-    Task.deleteMany({ 'TaskStatus': 'Complete' }, function (err, doc) {
+    Task.deleteMany({
+        'TaskStatus': 'Complete'
+    }, function (err, doc) {
         // console.log(doc);
     });
     res.redirect('/listtask');
@@ -126,10 +132,26 @@ app.get('/updatetask', function (req, res) {
 
 app.post('/updatetaskdata', function (req, res) {
     let taskDetails = req.body;
-    Task.updateOne({ '_id': taskDetails.taskId }, { $set: { 'TaskStatus': taskDetails.taskstatnew } }, function (err, doc) {
+    Task.updateOne({
+        '_id': taskDetails.taskId
+    }, {
+        $set: {
+            'TaskStatus': taskDetails.taskstatnew
+        }
+    }, function (err, doc) {
         // console.log(doc);
     });
     res.redirect('/listtask');
 })
 
+app.get('/extra', function (req, res) {
+    Task.where({
+        'TaskStatus': "Complete"
+    }).where('Taskname').limit(3).sort({
+        Taskname: -1
+    }).exec(function (err, docs) {
+         res.send(docs);
+    });
+   
+});
 app.listen(8080);
